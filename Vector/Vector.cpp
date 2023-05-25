@@ -1,7 +1,6 @@
-﻿#include <vector>
+#include <vector>
 #include <stdexcept>
 #include <iostream>
-
 
 using namespace std;
 
@@ -9,46 +8,40 @@ vector<int> zakodowaneHaslo(const string& haslo) {
     vector<int> zakodowaneHaslo;
 
     for (char c : haslo) {
+        int kod;
         if (c >= 'a' && c <= 'z') {
-           
-            zakodowaneHaslo.push_back(c - 'a' + 1);
+            kod = c - 'a' + 1;
         }
         else if (c >= 'A' && c <= 'Z') {
-            
-            zakodowaneHaslo.push_back(c - 'A' + 27);
+            kod = c - 'A' + 27;
         }
-        else if (c >= 'O' && c <= 'g') {
-            
-            zakodowaneHaslo.push_back(c - '0' + 53);
+        else if (c >= '0' && c <= '9') {
+            kod = c - '0' + 53;
         }
         else {
-            throw std::invalid_argument("zly znak w haslo");
+            throw invalid_argument("zly znak w haslo");
         }
+        zakodowaneHaslo.push_back(kod);
     }
 
     return zakodowaneHaslo;
 }
 
-int main()
-{
+int main() {
     string haslo = "Admin123";
 
-
-
     try {
-        std::vector<int> encoded = zakodowaneHaslo(haslo);
+        vector<int> zakodowane = zakodowaneHaslo(haslo);
 
-        cout << "zakodowane haslo:";
-        for (int digit : encoded) {
+        cout << "Zakodowane haslo: ";
+        for (int digit : zakodowane) {
             cout << digit << " ";
         }
-
+        cout << endl;
     }
-
     catch (const invalid_argument& e) {
-        cout << "wyjatek: " << e.what() << endl;
+        cout << "Wyjatek: " << e.what() << endl;
     }
+
     return 0;
-
-
 }
