@@ -1,6 +1,7 @@
 ﻿#include <vector>
-#include <iostream>
 #include <stdexcept>
+#include <iostream>
+
 
 using namespace std;
 
@@ -9,12 +10,15 @@ vector<int> zakodowaneHaslo(const string& haslo) {
 
     for (char c : haslo) {
         if (c >= 'a' && c <= 'z') {
+           
             zakodowaneHaslo.push_back(c - 'a' + 1);
         }
         else if (c >= 'A' && c <= 'Z') {
+            
             zakodowaneHaslo.push_back(c - 'A' + 27);
         }
         else if (c >= 'O' && c <= 'g') {
+            
             zakodowaneHaslo.push_back(c - '0' + 53);
         }
         else {
